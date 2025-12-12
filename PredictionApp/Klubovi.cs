@@ -26,7 +26,7 @@ namespace PredictionApp
     {
       try
       {
-        //TODO: Pozvati sql upit za učitavanje klubova iz baze podataka
+        
         using (var connection = new SqlConnection(Properties.Settings.Default.connString)) 
         { 
             List<Team> klubovi = connection.Query<Team>("SELECT * FROM Team").ToList();

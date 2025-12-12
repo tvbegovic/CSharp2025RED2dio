@@ -1,4 +1,5 @@
 ﻿
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -32,7 +33,16 @@ namespace PredictionApp
       {
         cmbKlubovi.ValueMember = "Id";
         cmbKlubovi.DisplayMember = "Name";
-        //TODO: Pozvati sql upit za učitavanje klubova iz baze podataka
+                
+                using (var connection = new SqlConnection(Properties.Settings.Default.connString)) 
+                {
+                    klubovi = connection.Query<Team>("SELECT * FROM Team").ToList();
+                    Team sviKlubovi = new Team();
+                    sviKlubovi.Id = 0;
+                    sviKlubovi.Name = "Svi klubovi";
+                    klubovi.Insert(0, sviKlubovi);
+                    cmbKlubovi.DataSource = klubovi;
+                }
       }
       catch (Exception ex)
       {
@@ -47,7 +57,7 @@ namespace PredictionApp
 
     private void UcitajUtakmice()
     {
-      //TODO: Implementirati SQL upit za učitavanje utakmica iz baze podataka (prvo sve, kasnije sa filterima)
+      
       string text = txtTekst.Text.Trim();
       int? klubId = (cmbKlubovi.SelectedItem as Team)?.Id;
       DateTime? dateFrom = null;
@@ -62,7 +72,19 @@ namespace PredictionApp
         dateTo = dtTo;
       try
       {
-        //TODO: Pozvati sql upit za učitavanje utakmica iz baze podataka sa zadatim filterima (ne zaboraviti osvježiti grid)
+                
+          string sql = @"SELECT m.Id, m.MatchDate, m.ProbHomeWin * 100 ProbHomeWin, m.ProbAwayWin * 100 ProbAwayWin,(1 - m.ProbHomeWin - m.ProbAwayWin) * 100 ProbDraw, t1.Name HomeTeam, t2.Name AwayTeam 
+            FROM Match m
+            LEFT OUTER JOIN Team t1 ON m.HomeTeamId = t1.Id
+            LEFT OUTER JOIN Team t2 ON m.AwayTeamId = t2.Id
+            WHERE (m.HomeTeamId = @klubId OR m.AwayTeamId = @klubId OR @klubId IS NULL) AND
+            (m.MatchDate >= @dateFrom OR @dateFrom IS NULL) AND
+            (m.MatchDate <= @dateTo OR @dateTo IS NULL)";
+            using (var connection = new SqlConnection(Properties.Settings.Default.connString))
+            {
+                utakmice = connection.Query<Match>(sql, new { klubId, dateFrom, dateTo }).ToList();
+                AzurirajGrid();
+            }
       }
       catch (Exception ex)
       {
