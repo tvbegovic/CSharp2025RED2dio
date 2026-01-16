@@ -38,6 +38,7 @@
         public string Password { get; set; }
         public bool? Admin { get; set; }
         public string City { get; set; }
+        public string? Password2 { get; set; }
     }
     public class Game
     {
