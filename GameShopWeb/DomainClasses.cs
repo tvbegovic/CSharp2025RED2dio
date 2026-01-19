@@ -19,6 +19,8 @@
         public int? IdEmployee { get; set; }
         public DateTime? DateOrdered { get; set; }
         public DateTime? DateSent { get; set; }
+        //Ovo smo naknadno dodali jer frontend šalje stavke unutar Order objekta
+        public List<OrderDetail> Details { get; set; }
     }
     public class OrderDetail
     {
@@ -33,11 +35,11 @@
         public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public bool? Admin { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public string? Password2 { get; set; }
     }
     public class Game

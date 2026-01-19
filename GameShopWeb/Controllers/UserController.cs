@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -99,6 +100,23 @@ namespace GameShopWeb.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        [HttpPut("")]
+        [Authorize]
+        public IActionResult UpdateUser(User user)
+        {
+            if(string.IsNullOrEmpty(user.Firstname) || string.IsNullOrEmpty(user.Lastname)) {
+                return BadRequest("Ime i prezime moraju biti zadani");
+            }
+            using (var connection = new SqlConnection(configuration.GetConnectionString("connString")))
+            {
+                string sql = @"UPDATE [User] SET firstname = @firstname, 
+                    lastname = @lastname, address = @address, city = @city
+                    WHERE id = @id";
+                connection.Execute(sql, user);
+                return Ok();
+            }
         }
     }
 
