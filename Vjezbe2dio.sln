@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictionApp", "Prediction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShopWeb", "GameShopWeb\GameShopWeb.csproj", "{991ADAF9-FE1F-4F16-8E31-4BDFDB9C2ADD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictionAppApiClient", "PredictionAppApiClient\PredictionAppApiClient.csproj", "{85CD3A3F-76F8-4E89-B286-AA1DABFD615B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{991ADAF9-FE1F-4F16-8E31-4BDFDB9C2ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991ADAF9-FE1F-4F16-8E31-4BDFDB9C2ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991ADAF9-FE1F-4F16-8E31-4BDFDB9C2ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85CD3A3F-76F8-4E89-B286-AA1DABFD615B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CD3A3F-76F8-4E89-B286-AA1DABFD615B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CD3A3F-76F8-4E89-B286-AA1DABFD615B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CD3A3F-76F8-4E89-B286-AA1DABFD615B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

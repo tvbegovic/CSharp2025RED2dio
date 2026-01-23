@@ -67,7 +67,7 @@ namespace PredictionApp
           try
           {
 
-                        string sql = @"INSERT INTO [dbo].[Prediction]
+            string sql = @"INSERT INTO [dbo].[Prediction]
                                ([MatchId]
                                ,[UserName]
                                ,[PredictionTypeId]
@@ -77,15 +77,15 @@ namespace PredictionApp
                                ,@UserName
                                ,@PredictionTypeId
                                ,@CreatedAt)";
-                        using (var connection = new SqlConnection(Properties.Settings.Default.connString)) 
-                        {
-                            connection.Execute(sql, p);
-                        }
+            using (var connection = new SqlConnection(Properties.Settings.Default.connString))
+            {
+              connection.Execute(sql, p);
+            }
 
-                            //Zbog jednostavnosti, ponovno učitavamo sve prognoze iz baze nakon dodavanja nove (umjesto da samo dodajemo novi objekt u lokalnu listu) - zbog veza s drugim tablicama
-                            UcitajPrognoze();
+            //Zbog jednostavnosti, ponovno učitavamo sve prognoze iz baze nakon dodavanja nove (umjesto da samo dodajemo novi objekt u lokalnu listu) - zbog veza s drugim tablicama
+            UcitajPrognoze();
             AzurirajGrid();
-            
+
           }
           catch (Exception ex)
           {
