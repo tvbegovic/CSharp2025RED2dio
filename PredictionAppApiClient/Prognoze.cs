@@ -79,7 +79,7 @@ namespace PredictionAppApiClient
       }
     }
 
-    private void btnUredi_Click(object sender, EventArgs e)
+    private async void btnUredi_Click(object sender, EventArgs e)
     {
       if (dgvPrognoze.SelectedRows.Count == 0)
       {
@@ -103,7 +103,7 @@ namespace PredictionAppApiClient
         UserName = selected.UserName,
         CreatedAt = selected.CreatedAt
       };
-      var editForm = new PredictionEdit();
+      var editForm = new PredictionEdit(kopija);
       editForm.ApiClient = ApiClient;
       //using (var dlg = new PredictionEdit(kopija))
       {
@@ -113,7 +113,9 @@ namespace PredictionAppApiClient
           try
           {
 
-
+            var response = await ApiClient.PutAsync<Prediction, Prediction>(
+             $"{Properties.Settings.Default.apiUrl}prediction",
+             p);
 
 
             // Ažuriraj lokalnu listu i grid
@@ -141,7 +143,7 @@ namespace PredictionAppApiClient
 
     }
 
-    private void btnObrisi_Click(object sender, EventArgs e)
+    private async void btnObrisi_Click(object sender, EventArgs e)
     {
       if (dgvPrognoze.SelectedRows.Count == 0)
       {
@@ -155,7 +157,8 @@ namespace PredictionAppApiClient
         return;
       try
       {
-        //TODO: Pozvati sql upit za brisanje prognoze iz baze podataka. Učitati ponovo listu prognoza nakon brisanja i osvježiti grid
+        await ApiClient.DeleteAsync<int>(
+             $"{Properties.Settings.Default.apiUrl}prediction/{selectedId}");
 
         UcitajPrognoze();
         AzurirajGrid();
