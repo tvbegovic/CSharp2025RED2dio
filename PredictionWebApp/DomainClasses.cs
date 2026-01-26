@@ -44,8 +44,8 @@
         public int PredictionTypeId { get; set; }
         public DateTime CreatedAt { get; set; }
         //Dodatna polja za prikaz podataka u gridu
-        public string Match { get; set; }
-        public string PredictionType { get; set; }
+        public string? Match { get; set; }
+        public string? PredictionType { get; set; }
     }
 
     public class User

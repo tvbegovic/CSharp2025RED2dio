@@ -25,7 +25,7 @@ namespace PredictionAppApiClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7297/api/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7057/api/")]
         public string apiUrl {
             get {
                 return ((string)(this["apiUrl"]));
