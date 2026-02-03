@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -17,6 +18,7 @@ namespace SensorHubWeb.Controllers
         }
 
         [HttpPost("")]
+        [Authorize]
         public IActionResult ReportIssue(Issue issue) 
         {
             if(string.IsNullOrEmpty(issue.Description))

@@ -30,5 +30,15 @@ namespace SensorHubWeb.Controllers
                 return connection.Query<Reading>(sql, new { from, to, minValue, maxValue }).ToList();
             }
         }
+
+        [HttpGet("{sensorId}")]
+        public List<Reading> GetReadingsBySensorId(int sensorId)
+        {
+            string sql = "SELECT * FROM Reading WHERE SensorId = @sensorId";
+            using (SqlConnection connection = new SqlConnection(configuration.GetConnectionString("connString")))
+            {
+                return connection.Query<Reading>(sql, new { sensorId }).ToList();
+            }
+        }
     }
 }
